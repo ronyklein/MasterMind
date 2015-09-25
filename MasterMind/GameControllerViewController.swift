@@ -9,19 +9,15 @@
 import UIKit
 
 class GameControllerViewController: UIViewController {
-   
-    
     var currentColor = UIColor.blueColor()
     
     var moves = 0
     var rowActive = 0
     var gameOver = false
     var Level = levels.easy
-    
     var gameBullPgia = [bullPgia](count: 4, repeatedValue: bullPgia.empty)
     
-        var game = GameManager()
-        var game2 = GameManager2()
+    var game = GameManager()
     var currentNumber = 0
     
     var currentSelection = [Int](count: 4, repeatedValue: -1)
@@ -29,19 +25,12 @@ class GameControllerViewController: UIViewController {
     @IBOutlet var brickgroup: [UIImageView]!
     
     @IBAction func SubmitAction(sender: UIButton) {
-        
-    
         if (!gameOver){
-        //brickgroup[1].image = UIImage(named: "pgia")
+            //brickgroup[1].image = UIImage(named: "pgia")
             
             if (currentSelection[0] != currentSelection[1]) && (currentSelection[0] != currentSelection[2]) && (currentSelection[0] != currentSelection[3]) && (currentSelection[1] != currentSelection[2]) && (currentSelection[1] != currentSelection[3]) && (currentSelection[2] != currentSelection[3]) && (currentSelection[0] != -1) && (currentSelection[1] != -1) && (currentSelection[2] != -1) && (currentSelection[3] != -1) {
-                if Level == .easy {
-               gameBullPgia = game.checkNumbers(num2: currentSelection)
-                }
-                else {
-                    gameBullPgia = game2.checkNumbers(num2: currentSelection)
-                }
-                    drawBullPgia(bullpgia: gameBullPgia)
+                gameBullPgia = game.checkNumbers(num2: currentSelection)
+                drawBullPgia(bullpgia: gameBullPgia)
                 rowActive += 4
                 moves++
                 if rowActive > 51 {
@@ -63,17 +52,15 @@ class GameControllerViewController: UIViewController {
     
     @IBAction func SetColorsAction(sender: UIButton) {
         if !gameOver {
-        currentColor = sender.backgroundColor!
-        currentNumber = sender.tag
+            currentColor = sender.backgroundColor!
+            currentNumber = sender.tag
         }
     }
     @IBAction func gameButtonsAction(sender: UIButton) {
         if (sender.tag >= rowActive) && (sender.tag < rowActive + 4) && (!gameOver){
             sender.backgroundColor = currentColor
-        currentSelection[sender.tag - rowActive] = currentNumber
+            currentSelection[sender.tag - rowActive] = currentNumber
         }
-        
-        
     }
     @IBOutlet var gamebuttons: [UIButton]!
     var Leveltype = levels.easy
@@ -96,32 +83,33 @@ class GameControllerViewController: UIViewController {
             
         }
     }
-override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
+        game.setLevel(Level)
+
         //for(var i = 2;i<5;i++){
         for b in self.buttons{
-           b.layer.cornerRadius = 15
+            b.layer.cornerRadius = 15
         }
         for gb in self.gamebuttons{
             gb.layer.cornerRadius = 10
         }
         // Do any additional setup after loading the view.
     }
-        override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

@@ -22,17 +22,15 @@ class MainController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let nextVC = segue.destinationViewController as! GameControllerViewController
         if segue.identifier == "startId"{
-            let nextVC = segue.destinationViewController as! GameControllerViewController
             //nextVC is an viewController of the type of CollectionViewGameBoardViewController
             //pushing the names of the players to the next controller
             nextVC.Level = levels.easy
         }
         else if segue.identifier == "hardId"{
-            let nextVC = segue.destinationViewController as! GameControllerViewController
             nextVC.Level = levels.hard
-        
-    }
+        }
     }
     /*
     // MARK: - Navigation

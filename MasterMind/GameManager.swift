@@ -23,12 +23,16 @@ class GameManager: NSObject {
     var oknum = false
 
     override init() {
+        super.init()
+    }
+    
+    func setLevel(level:levels) {
         var number1 = 0
         var number2 = 0
         var number3 = 0
         var number4 = 0
-        var numberofcolors = 6
-    
+        var numberofcolors = (level == levels.easy ? 6 : 10)
+        
         while !oknum {
             number1 = random() % numberofcolors
             number2 = random() % numberofcolors
@@ -56,12 +60,8 @@ class GameManager: NSObject {
         self.computerColor[1] = number2
         self.computerColor[2] = number3
         self.computerColor[3] = number4
-        
-       
-       
-        super.init()
-    
     }
+
     func checkNumbers(num2 secondNumber:[Int]) -> [bullPgia]{
         var bullHit = [bullPgia](count: 4, repeatedValue: bullPgia.empty)
         var count = 0
@@ -82,8 +82,5 @@ class GameManager: NSObject {
             }
         }
         return bullHit
-        
-        
-        
     }
 }
